@@ -9,6 +9,8 @@ class AppState extends EventEmitter {
 
   /** @type {import('./Models/Car').Car[]} */
   cars = []
+  /** @type {import('./Models/House').House[]} */
+  houses = []
 }
 
 export const appState = new Proxy(new AppState(), {
