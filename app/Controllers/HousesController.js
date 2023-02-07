@@ -18,7 +18,7 @@ function _drawHouses() {
 // ✅ CREATE || POST 
 // ✅ READ || GET
 // ⬛ UPDATE || PUT
-// ⬛ DESTROY || DELETE
+// ✅ DESTROY || DELETE
 
 export class HousesController {
     constructor() {
@@ -41,7 +41,7 @@ export class HousesController {
             // @ts-ignore
             const form = window.event.target
             const formData = getFormData(form)
-            console.log(formData);
+            // console.log(formData);
             await housesService.createHouse(formData)
             // @ts-ignore
             form.reset()
@@ -64,7 +64,32 @@ export class HousesController {
 
     }
 
-    // drawForm() {
-    //     console.log('draw houses form!');
-    // }
+    drawForm(houseId) {
+        try {
+            if (houseId) {
+                let house = appState.houses.find(h => h.id == houseId)
+                setHTML('modal-content', House.HouseForm(house))
+            } else {
+                setHTML('modal-content', House.HouseForm({}))
+            }
+        } catch (error) {
+            Pop.error(error.message)
+            console.error(error);
+        }
+    }
+    async editHouse(houseId) {
+        try {
+            // @ts-ignore
+            window.event.preventDefault()
+            // @ts-ignore
+            const form = window.event.target
+            const formData = getFormData(form)
+            await housesService.editHouse(formData, houseId)
+
+        } catch (error) {
+            console.error(error);
+            Pop.error(error.message)
+        }
+    }
+
 }
