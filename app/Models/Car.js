@@ -1,5 +1,5 @@
 export class Car {
-  constructor (data) {
+  constructor(data) {
     this.id = data.id || ''
     this.createdAt = data.createdAt
     this.description = data.description
@@ -14,7 +14,7 @@ export class Car {
     return `
     <div class="col-md-4 mb-3">
       <div class="card">
-        <img src="${this.img}" class="card-img-top car-img"
+        <img src="${this.img}" class="card-img-top listing-img"
           alt="car">
         <div class="card-body">
           <div class="card-title fs-5">${this.make + ' ' + this.model}</div>
