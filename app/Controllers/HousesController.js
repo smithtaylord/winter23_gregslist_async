@@ -1,5 +1,7 @@
 import { appState } from "../AppState.js";
+import { House } from "../Models/House.js";
 import { housesService } from "../Services/HousesService.js";
+import { getFormData } from "../Utils/FormHandler.js";
 import { Pop } from "../Utils/Pop.js";
 import { setHTML } from "../Utils/Writer.js";
 
@@ -7,8 +9,16 @@ function _drawHouses() {
     let template = ''
     appState.houses.forEach(h => template += h.HouseCard)
     setHTML('listings', template)
+    setHTML('modal-content', House.HouseForm())
+    setHTML('form-button', House.FormButton())
 
 }
+
+// NOTE CRUD METHODS
+// ✅ CREATE || POST 
+// ✅ READ || GET
+// ⬛ UPDATE || PUT
+// ⬛ DESTROY || DELETE
 
 export class HousesController {
     constructor() {
@@ -23,4 +33,26 @@ export class HousesController {
             console.error(error)
         }
     }
+
+    async createHouse() {
+        try {
+            // @ts-ignore
+            window.event.preventDefault()
+            // @ts-ignore
+            const form = window.event.target
+            const formData = getFormData(form)
+            console.log(formData);
+            await housesService.createHouse(formData)
+            // @ts-ignore
+            form.reset()
+        } catch (error) {
+            Pop.error(error.message)
+            console.error(error)
+        }
+
+    }
+
+    // drawForm() {
+    //     console.log('draw houses form!');
+    // }
 }
