@@ -6,13 +6,13 @@ import { setHTML } from "../Utils/Writer.js";
 function _drawHouses() {
     let template = ''
     appState.houses.forEach(h => template += h.HouseCard)
-    setHTML('listing', template)
+    setHTML('listings', template)
 
 }
 
 export class HousesController {
     constructor() {
-        console.log('Houses Controller Logging!');
+        appState.on('houses', _drawHouses)
     }
 
     async getHouses() {

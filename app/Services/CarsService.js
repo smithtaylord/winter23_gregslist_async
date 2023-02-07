@@ -33,7 +33,7 @@ class CarsService {
     // console.log('[get cars]', response.data)
     const newArray = response.data.map(car => new Car(car))
     appState.cars = newArray
-    console.log(appState.cars);
+    // console.log(appState.cars);
   }
 
 }
