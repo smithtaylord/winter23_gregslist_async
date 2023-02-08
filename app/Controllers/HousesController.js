@@ -9,7 +9,7 @@ function _drawHouses() {
     let template = ''
     appState.houses.forEach(h => template += h.HouseCard)
     setHTML('listings', template)
-    setHTML('modal-content', House.HouseForm())
+    setHTML('modal-content', House.HouseForm({}))
     setHTML('form-button', House.FormButton())
 
 }
